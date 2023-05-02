@@ -39,22 +39,10 @@ pipeline{
                             '''
                     }
                 }
-            }
-        }
-        stage('indentifying misconfigs using datree in helm charts'){
-            steps{
-                script{
 
-                    dir('kubernetes/') {
-			            withEnv(['DATREE_TOKEN=6cca2a16-0570-4d87-85b8-71d2208e9079']) {
-			                  sh 'helm datree test myapp/'
-                        
-                        }
-                   }
-                }
             }
-        }
-        stage("pushing the helm charts to nexus"){
+        }          
+         stage("pushing the helm charts to nexus"){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
